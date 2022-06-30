@@ -6,7 +6,16 @@
 }
 
 .App{background-color: #0a191c;}
-
+.loading{width:100%;
+height:100vh;
+display:flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;}
+.loading p{
+  color: white;
+  font-size:20px
+}
   @media only screen and (max-width: 600px) {
     nav{background-color: #47b1c9;
       height: 100px;

@@ -25,7 +25,7 @@ useEffect(()=>{
       <h4 key={e.id}>Genero del usuario:</h4><p>{e.gender}</p><br/>
       <h4 key={e.id}>Estado del usuario:</h4> <p>{e.status}</p>
 
-      </div>}):<p>Loading</p>}
+      </div>}):<div className="loading"><p>Loading...</p></div>}
       </div>
 
 
