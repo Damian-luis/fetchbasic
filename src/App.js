@@ -12,20 +12,42 @@ const [datos,setDatos]=useState();
 useEffect(()=>{
   traer()
 },[])
-function statusHandler(e){
-  if(e.target.value=="all"){
-    const data = axios.get("https://backforproject.herokuapp.com/users").then(e=>{setDatos(e.data)}) 
-  }
-  const data =  axios.get(`https://backforproject.herokuapp.com/users/status/${e.target.value}`).then(e=>{setDatos(e.data)}) 
+async function statusHandler(e){
+  if(e.target.value==="all"){
+    
+      
+  traer()
+    }
+  else {
+    await axios.get(`https://backforproject.herokuapp.com/users/status/${e.target.value}`).then(e=>{setDatos(e.data)}) }
 }
-function genderHandler(e){
-  const data =  axios.get(`https://backforproject.herokuapp.com/users/gender/${e.target.value}`).then(e=>{setDatos(e.data)}) 
+
+
+
+async function genderHandler(e){
+  if(e.target.value==="all"){
+    
+      
+    traer()
+      }
+      else{
+   axios.get(`https://backforproject.herokuapp.com/users/gender/${e.target.value}`).then(e=>{setDatos(e.data)}) }
 }
 
 
   return (
     <div className="App">
-      <nav><p>No mucho que ver aqui, simple fetch a una api con react ;)</p></nav>
+      <nav><p>Esta app hace una peticion a una Api que cree y desplegue en Heroku, realice 2 filtros de estado (activo/inactivo) y genero de la persona (masculino/femenino).<br/>
+        Ambos filtros son endpoints, en caso de elegir opcion "ambos" solo usa el fetch principal alojado en el estado principal. <br/>
+        <span className="importante" >Aclaracion: Estoy trabajando en guardar toda la informacion en una base de datos y asi poder editar la informacion
+          como un CRUD <br/>
+          Adicionalmente implentarle un sistema de registros/login <br/><br/>
+          Ultima actualización 4 de julio 2022, espero en una semana tener todos los cambios realizados (Lunes 11 de julio 2022)</span>
+           </p></nav>
+
+
+<div className="filtros">
+  <div className="filtros-content">
 
 <select onChange={statusHandler}>
   <option value="all">Todos</option>
@@ -37,6 +59,10 @@ function genderHandler(e){
   <option value="female">Femenino</option>
   <option value="male">Masculino</option>
 </select>
+
+</div>
+</div>
+
       <div className="body">
       {datos? datos.map(e=>{return <div className="card" key={e.id}> 
       
