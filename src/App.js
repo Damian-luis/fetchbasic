@@ -3,36 +3,52 @@ import axios from 'axios';
 import { useState,useEffect } from 'react';
 function App() {
 const [datos,setDatos]=useState();
+const [datosActuales,setDatosActuales]=useState();
+const [data,setData]=useState();
  async function traer(){  
-  const data = await axios.get("https://backforproject.herokuapp.com/users").then(e=>{setDatos(e.data)}) 
-
+  await axios.get("https://backforproject.herokuapp.com/all").then(e=>{setDatos(e.data)}) 
+   await axios.get("https://backforproject.herokuapp.com/all").then(e=>{setDatosActuales(e.data)}) 
+   await axios.get("https://backforproject.herokuapp.com/all").then(e=>{setData(e.data)}) 
 }
 
 
 useEffect(()=>{
   traer()
 },[])
+
+
+
 async function statusHandler(e){
+  var value=e.target.value
   if(e.target.value==="all"){
     
       
   traer()
     }
   else {
-    await axios.get(`https://backforproject.herokuapp.com/users/status/${e.target.value}`).then(e=>{setDatos(e.data)}) }
+    var actual=data.filter(e=>{return e.status===value})
+    setDatosActuales(actual)
+    setDatos(actual)
+     }
 }
 
 
 
 async function genderHandler(e){
+  const genero=e.target.value
   if(e.target.value==="all"){
     
       
-    traer()
+    const actual = datosActuales.filter(e=>{return e.gender===genero})
       }
-      else{
-   axios.get(`https://backforproject.herokuapp.com/users/gender/${e.target.value}`).then(e=>{setDatos(e.data)}) }
-}
+      
+    else{
+      
+      const actual = datosActuales.filter(e=>{return e.gender===genero})
+      setDatos(actual)
+
+    }
+    }
 
 
   return (
