@@ -51,6 +51,38 @@ async function genderHandler(e){
     }
 
 
+    //AQUUI ABAJO PASAR LAS SIGUIENES FUCIUNOES A COMPOENTTIZAR
+    const [form,setForm] =useState({
+      name:"",
+      gender:"",
+      mail:"",
+      status:""
+    });
+    //envio a backend
+    async function formHandler(e){
+      e.preventDefault();
+        axios.post(form,"https://backforproject.herokuapp.com/new-users")
+    }
+    //handlers inputs 
+    function nameFormHandler(e){
+        setForm({...form,name:e.target.value})
+    }
+    function genderFormHandler(e) {
+        setForm({...form,gender:e.target.value})
+    }
+    function mailFormHandler(e){
+        setForm({...form,mail:e.target.value})
+    }
+    function statusFormHandler(e) {
+        setForm({...form,status:e.target.value})
+    }
+
+    //funcion a compoenttizar DELETE 
+    function deleteHandler(e){
+      const id = e.target.value
+      
+      axios.delete(`https://backforproject.herokuapp.com/delete/${id}`)
+    }
   return (
     <div className="App">
       <nav><p>Esta app hace una peticion a una Api que cree y desplegue en Heroku, realice 2 filtros de estado (activo/inactivo) y genero de la persona (masculino/femenino).<br/>
@@ -59,7 +91,23 @@ async function genderHandler(e){
           como un CRUD <br/>
           Adicionalmente implentarle un sistema de registros/login <br/><br/>
           Ultima actualización 4 de julio 2022, espero en una semana tener todos los cambios realizados (Lunes 11 de julio 2022)</span>
-           </p></nav>
+           </p>
+           <h1>Aplicando algunos cambios, la informacion no se vera correctamente, actualización MIERCOLES 6 DE JULIO 13:38 HORA ARGENTINA</h1></nav>
+
+
+
+<div className="formulario">
+  <form onSubmit={formHandler}>
+    <input type="text" placeholder="Escriba su nombre aqui" onChange={nameFormHandler}></input>
+    <input type="text" placeholder="Escriba su genero aqui" onChange={genderFormHandler}></input>
+    <input type="mail" placeholder="Escriba su correo aqui" onChange={mailFormHandler}></input>
+    <input type="text" placeholder="Escriba su estado aqui" onChange={statusFormHandler}></input>
+    <button type="submit">Registrar</button>
+  </form>
+</div>
+
+
+
 
 
 <div className="filtros">
@@ -86,7 +134,7 @@ async function genderHandler(e){
       <h4 key={e.id}>Mail de contacto del usuario:</h4><p>{e.email}</p><br/>
       <h4 key={e.id}>Genero del usuario:</h4><p>{e.gender}</p><br/>
       <h4 key={e.id}>Estado del usuario:</h4> <p>{e.status}</p>
-
+      <button onClick={deleteHandler} value={e.id}>Eliminar</button>
       </div>}):<div className="loading"><p>Loading...</p></div>}
       </div>
 
