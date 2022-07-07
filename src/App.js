@@ -64,12 +64,7 @@ async function genderHandler(e){
       e.preventDefault();
       
       try{
-        await axios.post("https://backforproject.herokuapp.com/new-users",{
-          name:"probadno",
-          mail:"asd",
-          gender:"male",
-          status:"active"
-        })
+        await axios.post("https://backforproject.herokuapp.com/new-users",form)
       }
       catch(err){console.log(err);}
     }
@@ -92,6 +87,7 @@ async function genderHandler(e){
       const id = e.target.value
       
       await axios.delete(`https://backforproject.herokuapp.com/delete/${id}`)
+      
     }
   return (
     <div className="App">
@@ -100,9 +96,9 @@ async function genderHandler(e){
         <span className="importante" >Aclaracion: Estoy trabajando en guardar toda la informacion en una base de datos y asi poder editar la informacion
           como un CRUD <br/>
           Adicionalmente implentarle un sistema de registros/login <br/><br/>
-          Ultima actualización 4 de julio 2022, espero en una semana tener todos los cambios realizados (Lunes 11 de julio 2022)</span>
+          Ultima actualización 7 de julio 2022, realizada la conexion a db,solo me queda el sistema de registros. Espero añadir todo el(Lunes 11 de julio 2022)</span>
            </p>
-           <h1>Aplicando algunos cambios, la informacion no se vera correctamente, actualización MIERCOLES 6 DE JULIO 13:38 HORA ARGENTINA</h1></nav>
+           </nav>
 
 
 
@@ -141,7 +137,7 @@ async function genderHandler(e){
       {datos? datos.map(e=>{return <div className="card" key={e.id}> 
       
       <h4 key={e.id}>Nombre del usuario:</h4> <p>{e.name}</p><br/>
-      <h4 key={e.id}>Mail de contacto del usuario:</h4><p>{e.email}</p><br/>
+      <h4 key={e.id}>Mail de contacto del usuario:</h4><p>{e.mail}</p><br/>
       <h4 key={e.id}>Genero del usuario:</h4><p>{e.gender}</p><br/>
       <h4 key={e.id}>Estado del usuario:</h4> <p>{e.status}</p>
       <button onClick={deleteHandler} value={e.id}>Eliminar</button>
