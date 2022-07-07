@@ -1,6 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
+import swal from 'sweetalert';
 function App() {
 const [datos,setDatos]=useState();
 const [datosActuales,setDatosActuales]=useState();
@@ -67,7 +68,21 @@ async function genderHandler(e){
         await axios.post("https://backforproject.herokuapp.com/new-users",form)
       }
       catch(err){console.log(err);}
+      swal("Good job!", "Usuario añadido exitosamente!", "success");
+      e.target.reset();
+
+
+      var nuevo=[...datos,{
+        name:form.name,
+      gender:form.gender,
+      mail:form.mail,
+      status:form.status
+      }]
+      setDatos(nuevo);
     }
+
+
+
     //handlers inputs 
     function nameFormHandler(e){
         setForm({...form,name:e.target.value})
@@ -85,8 +100,35 @@ async function genderHandler(e){
     //funcion a compoenttizar DELETE 
     async function deleteHandler(e){
       const id = e.target.value
+      console.log(id)
       
-      await axios.delete(`https://backforproject.herokuapp.com/delete/${id}`)
+      console.log(datos)
+      swal({
+        title: "Estas seguro?",
+        text: "Una vez elimido el usuario se eliminará de la base de datos para siempre!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          axios.delete(`https://backforproject.herokuapp.com/delete/${id}`)
+          setDatos(datos.filter(data=>{return data.id != id}));
+        
+          swal("El usuario ha sido eliminado exitosamente!", {
+            icon: "success",
+          })
+          
+          ;
+        } else {
+          swal("Eliminación cancelada!");
+        }
+      });
+
+      
+
+
+     
       
     }
   return (
