@@ -147,9 +147,19 @@ async function genderHandler(e){
 <div className="formulario">
   <form onSubmit={formHandler}>
     <input type="text" placeholder="Escriba su nombre aqui" onChange={nameFormHandler}></input>
-    <input type="text" placeholder="Escriba su genero aqui" onChange={genderFormHandler}></input>
     <input type="mail" placeholder="Escriba su correo aqui" onChange={mailFormHandler}></input>
-    <input type="text" placeholder="Escriba su estado aqui" onChange={statusFormHandler}></input>
+    
+    <select onChange={genderFormHandler}>
+    <option value="female" >Femenino</option>
+    <option value="male" >Masculino</option>
+    </select>
+    <select onChange={statusFormHandler}>
+    <option value="active">Activo</option>
+    <option value="inactive">Inactivo</option>
+    </select>
+    {/*<input type="text" placeholder="Escriba su genero aqui" onChange={genderFormHandler}></input>
+    
+  <input type="text" placeholder="Escriba su estado aqui" onChange={statusFormHandler}></input> */}
     <button type="submit">Registrar</button>
   </form>
 </div>
