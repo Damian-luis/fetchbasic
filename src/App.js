@@ -60,8 +60,18 @@ async function genderHandler(e){
     });
     //envio a backend
     async function formHandler(e){
+      console.log(form);
       e.preventDefault();
-        axios.post(form,"https://backforproject.herokuapp.com/new-users")
+      
+      try{
+        await axios.post("https://backforproject.herokuapp.com/new-users",{
+          name:"probadno",
+          mail:"asd",
+          gender:"male",
+          status:"active"
+        })
+      }
+      catch(err){console.log(err);}
     }
     //handlers inputs 
     function nameFormHandler(e){
@@ -78,10 +88,10 @@ async function genderHandler(e){
     }
 
     //funcion a compoenttizar DELETE 
-    function deleteHandler(e){
+    async function deleteHandler(e){
       const id = e.target.value
       
-      axios.delete(`https://backforproject.herokuapp.com/delete/${id}`)
+      await axios.delete(`https://backforproject.herokuapp.com/delete/${id}`)
     }
   return (
     <div className="App">
