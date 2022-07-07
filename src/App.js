@@ -96,7 +96,7 @@ async function genderHandler(e){
         <span className="importante" >Aclaracion: Estoy trabajando en guardar toda la informacion en una base de datos y asi poder editar la informacion
           como un CRUD <br/>
           Adicionalmente implentarle un sistema de registros/login <br/><br/>
-          Ultima actualización 7 de julio 2022, realizada la conexion a db,solo me queda el sistema de registros. Espero añadir todo el(Lunes 11 de julio 2022)</span>
+          Ultima actualización 7 de julio 2022, realizada la conexion a db,hay que trabajar en el estado para vaciar inputs y renderizar nuevamente (se puede añadir lo usuarios a la db, solo visibles al refrescar la página), además de eso solo me queda el sistema de registros. Espero añadir todo el(Lunes 11 de julio 2022)</span>
            </p>
            </nav>
 
