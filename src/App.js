@@ -125,12 +125,26 @@ async function genderHandler(e){
         }
       });
 
-      
-
-
-     
-      
     }
+
+
+
+
+    //Funciones,estados y handler para buscador
+
+    const [buscador,setBuscador] =useState()
+
+function handlerbuscador(e) {
+  var value = e.target.value
+  var valor=value.toLowerCase()
+  
+  setBuscador(valor)
+  }
+function buttonBuscador(e) {
+  e.preventDefault()
+  setDatos(datos.filter(datos=>{ return datos.name===buscador; }))
+}
+
   return (
     <div className="App">
       <nav><p>Esta app hace una peticion a una Api que cree y desplegue en Heroku, realice 2 filtros de estado (activo/inactivo) y genero de la persona (masculino/femenino).<br/>
@@ -141,6 +155,15 @@ async function genderHandler(e){
           Ultima actualización 7 de julio 2022, realizada la conexion a la base de datos. Solo quedan los registros/login Espero añadir todo el(Lunes 11 de julio 2022)</span>
            </p>
            </nav>
+
+
+<div className="buscador">
+  
+  <form onSubmit={buttonBuscador}>
+    <input type="text" placeholder="Nombre del usuario" onChange={handlerbuscador}></input>
+    <button type="submit">Buscar</button>
+  </form>
+</div>
 
 
 
